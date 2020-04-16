@@ -389,9 +389,9 @@ class GraphRewriter(object):
       for output_node in output_nodes:
         self.quantize_nodes_recursively(output_node)
     elif self.mode == "eightbit":
-      #self.set_input_graph(graph_util.remove_training_nodes(self.input_graph))
-      #output_nodes = [self.nodes_map[output_node_name]
-      #                for output_node_name in output_node_names]
+      self.set_input_graph(graph_util.remove_training_nodes(self.input_graph,protected_nodes=output_nodes))
+      output_nodes = [self.nodes_map[output_node_name]
+                     for output_node_name in output_node_names]
 
       self.state = EightbitizeRecursionState(already_visited={},
                                              output_node_stack=[],
